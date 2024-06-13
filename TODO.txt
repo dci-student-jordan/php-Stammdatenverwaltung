@@ -3,3 +3,4 @@ update inventar
 Angebotsgenerator pdf export
 Angebot update
 navigation: Angebot -> Raum/inventar Inventar -> Angebot
+Session expirement
