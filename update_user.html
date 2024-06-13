@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Benutzer verändern</title>
+    <link rel="stylesheet" href="style/style.css">
+</head>
+<body>
+    <?php
+        include 'update_user.php';
+    ?>
+    <script>
+        // if document is ready
+        document.addEventListener("DOMContentLoaded", function() {
+            // delete functionality
+            let del = document.getElementById('delete');
+            del.addEventListener('click', function() {
+                let del = confirm('User wirklich löschen?');
+                if (del) {
+                    document.getElementById('delete-form').submit();
+                } else {
+                    event.preventDefault();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

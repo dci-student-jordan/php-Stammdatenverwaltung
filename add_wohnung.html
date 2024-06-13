@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wohnung hinzufügen</title>
+    <link rel="stylesheet" href="style/style.css">
+</head>
+<body>
+    <?php
+        include 'add_wohnung.php';
+    ?>
+    <script>
+        // if document is ready
+        document.addEventListener("DOMContentLoaded", function() {
+            console.log('DOM ready');
+            let plz = document.getElementById('plz');
+            let go = document.getElementById('go');
+            plz.addEventListener('input', function() {
+                // if only numbers and length = 5
+                if (plz.value.match(/^[0-9]{5}$/)) {
+                    go.click();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

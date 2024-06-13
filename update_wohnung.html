@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wohnung verändern</title>
+    <link rel="stylesheet" href="style/style.css">
+    
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.7/css/dataTables.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/colreorder/2.0.2/css/colReorder.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/3.0.2/css/responsive.dataTables.min.css">
+    <script type='text/javascript' src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script type='text/javascript' src="https://cdn.datatables.net/2.0.7/js/dataTables.min.js"></script>
+    <script type='text/javascript' src="https://cdn.datatables.net/colreorder/2.0.2/js/dataTables.colReorder.min.js"></script>
+    <script type='text/javascript' src="https://cdn.datatables.net/responsive/3.0.2/js/dataTables.responsive.min.js"></script>
+
+</head>
+<body>
+    <?php
+        session_start();
+        include_once 'menu.php';
+        echo build_menu();
+    ?>
+    <div class="splitdiv">
+        <div>
+            <?php
+                include 'update_wohnung.php';
+            ?>
+        </div>
+        <div style="margin: 20px; padding: 20px; overflow-x: scroll; max-width: 80vw; background-color: rgb(20, 6, 32); box-shadow: 0 4px 8px 0 rgba(177, 177, 177, 0.2), 2px -6px 20px 0 rgba(189, 149, 199, 0.399); border-radius: 20px;;">
+            <?php
+                include 'raeume.php';
+            ?>
+        </div>
+    </div>
+    <script>
+        // if document is ready
+        document.addEventListener("DOMContentLoaded", function() {
+            // auto fill the form from plz
+            let plz = document.getElementById('plz');
+            let go = document.getElementById('go');
+            plz.addEventListener('input', function() {
+                // if only numbers and length = 5
+                if (plz.value.match(/^[0-9]{5}$/)) {
+                    go.click();
+                }
+            });
+            // delete functionality
+            let del = document.getElementById('delete');
+            del.addEventListener('click', function() {
+                let del = confirm('Wohnung wirklich löschen?');
+                if (del) {
+                    document.getElementById('delete-form').submit();
+                } else {
+                    event.preventDefault();
+                }
+            });
+            // update raum functionality
+            let qms = document.querySelectorAll('[name^="qm_"]');
+            qms.forEach(qm => {
+                qm.addEventListener('change', function() {
+                    let submit_button = document.getElementById(qm.getAttribute('name'));
+                    submit_button.click();
+                });
+            });
+            let notizen = document.querySelectorAll('[name^="notiz_"]');
+            notizen.forEach(notiz => {
+                notiz.addEventListener('input', function() {
+                    // if enter is pressed
+                    if (event.keyCode === 13) {
+                        let submit_button = document.getElementById(notiz.getAttribute('name'));
+                        submit_button.click();
+                    }
+                });
+            });
+            // delete raum functionality
+            let dels = document.querySelectorAll('[id="delete_raum"]');
+            dels.forEach(del => {
+                del.addEventListener('click', function() {
+                    let del = confirm('Raum wirklich löschen?');
+                    if (del) {
+                        let form = del.closest('form');
+                        form.submit();
+                    } else {
+                        event.preventDefault();
+                    }
+                });
+            });
+        });
+        var $ = jQuery;
+        $(document).ready( function () {
+            $('#inventar-table').DataTable(
+                {
+                    responsive: true,
+                    colReorder: true,
+                    language: {
+                        url: 'https://cdn.datatables.net/plug-ins/2.0.7/i18n/de-DE.json',
+                    },
+                }
+            );
+        } );
+    </script>
+</body>
+</html>

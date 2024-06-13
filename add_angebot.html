@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventar hinzufügen</title>
+    <link rel="stylesheet" href="style/style.css">
+</head>
+<body>
+    <?php
+        include 'add_angebot.php';
+    ?>
+    <script>
+        // if document is ready
+        document.addEventListener("DOMContentLoaded", function() {
+            // get all select elements
+            let selects = document.querySelectorAll('select');
+            // for each select element: on change update the label
+            selects.forEach(select => {
+                select.addEventListener('change', function() {
+                    let label = this.parentElement.querySelector('label');
+                    // get the label text and split by ','
+                    var options = select.options
+                    let preis = options[select.selectedIndex].getAttribute('preis');
+                    let anzahl = options[select.selectedIndex].getAttribute('anzahl');
+                    let gesamt_preis = parseFloat(preis * anzahl).toFixed(2);
+                    // set the label text
+                    label.innerHTML = `<strong style="font-size: 25px;">${anzahl}x ${select.id}, ${gesamt_preis}€, (Einzelpreis: ${parseFloat(preis).toFixed(2)}€)</strong>`;
+
+                });
+            });
+        });
+    </script>
+</body>
+</html>

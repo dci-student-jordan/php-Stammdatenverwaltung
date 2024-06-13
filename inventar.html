@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventar</title>
+    
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.7/css/dataTables.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/colreorder/2.0.2/css/colReorder.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/3.0.2/css/responsive.dataTables.min.css">
+    <script type='text/javascript' src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script type='text/javascript' src="https://cdn.datatables.net/2.0.7/js/dataTables.min.js"></script>
+    <script type='text/javascript' src="https://cdn.datatables.net/colreorder/2.0.2/js/dataTables.colReorder.min.js"></script>
+    <script type='text/javascript' src="https://cdn.datatables.net/responsive/3.0.2/js/dataTables.responsive.min.js"></script>
+
+</head>
+<body>
+    <?php
+        include 'inventar.php';
+    ?>
+    <script>
+        var $ = jQuery;
+        $(document).ready( function () {
+            $('#inventar-table').DataTable(
+                {
+                    responsive: true,
+                    colReorder: true,
+                    language: {
+                        url: 'https://cdn.datatables.net/plug-ins/2.0.7/i18n/de-DE.json',
+                    },
+                }
+            );
+        } );
+        // delete inventar functionality
+        let dels = document.querySelectorAll('[id="delete_inventar"]');
+        dels.forEach(del => {
+            del.addEventListener('click', function() {
+                let del = confirm('Inventar wirklich löschen?');
+                if (del) {
+                    let form = del.closest('form');
+                    form.submit();
+                } else {
+                    event.preventDefault();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

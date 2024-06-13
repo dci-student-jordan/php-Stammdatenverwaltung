@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Angebotsgenerator</title>
+    <link rel="stylesheet" href="style/style.css">
+</head>
+<body>
+    <?php
+        include 'angebot.php';
+    ?>
+    <script>
+        let angebot_status = document.getElementById('erledigt');
+        angebot_status.addEventListener('change', function() {
+            status = angebot_status.value;            
+            let submit = document.getElementById('submit');
+            if (angebot_status.value == '2') { 
+                let del = confirm('Inventar wirklich löschen?');
+                if (del) {
+                    console.log('Gelöscht');
+                    let form = angebot_status.closest('form');
+                    submit.click();
+                } else {
+                    console.log('Abgebrochen');
+                    event.preventDefault();
+                    location.reload();
+                }
+            } else {   
+                submit.click();
+            }
+        });
+    </script>
+</body>
+</html>

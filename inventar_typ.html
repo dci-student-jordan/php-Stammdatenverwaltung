@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventar-Typ</title>
+    <link rel="stylesheet" href="style/style.css">
+</head>
+<body>
+    <?php
+        include 'inventar_typ.php';
+    ?>
+    <script>
+        // delete inventar functionality
+        let dels = document.querySelectorAll('[id="delete_inventar_type"]');
+        dels.forEach(del => {
+            del.addEventListener('click', function() {
+                let del = confirm('Inventar-Typ wirklich löschen?');
+                if (del) {
+                    let form = del.closest('form');
+                    form.submit();
+                } else {
+                    event.preventDefault();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
