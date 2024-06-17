@@ -91,9 +91,9 @@ INSERT INTO `angebot_inventar` (`id`, `angebot_id`, `inventar_id`, `anzahl`) VAL
 CREATE TABLE `inventar` (
   `id` int(11) NOT NULL,
   `typ` int(11) NOT NULL,
-  `hersteller` varchar(100) NOT NULL,
+  `hersteller` varchar(100) DEFAULT NULL,
   `produkt` varchar(250) NOT NULL,
-  `farbe` varchar(50) NOT NULL,
+  `farbe` varchar(50) DEFAULT NULL,
   `preis` decimal(6,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -147,7 +147,7 @@ INSERT INTO `inventar_typ` (`id`, `typ`) VALUES
 CREATE TABLE `raum` (
   `id` int(11) NOT NULL,
   `wohnung_id` int(11) NOT NULL,
-  `qm` decimal(5,2) NOT NULL,
+  `qm` decimal(5,2) DEFAULT NULL,
   `notiz` varchar(250) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -181,7 +181,7 @@ CREATE TABLE `raum_inventar` (
   `raum_id` int(11) NOT NULL,
   `inventar_id` int(11) NOT NULL,
   `menge` int(11) NOT NULL,
-  `mengen_mass` varchar(25) NOT NULL
+  `mengen_mass` varchar(25) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --

@@ -1,8 +1,4 @@
 <?php
-// if session not yet started, start session
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
 if (!$_SESSION['is_authenticated']) {
     header('Location: login.html');
 }

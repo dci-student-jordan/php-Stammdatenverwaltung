@@ -1,5 +1,4 @@
 <?php
-
 function update_app_form($id=-1, $strasse="", $hausnummer="", $plz="", $stadt="", $bundesland="", $etage="", $groesse="") {
     if ($id == -1) {
         return '<h3 style="color:red;">No id given</h3>';

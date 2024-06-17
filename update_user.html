@@ -1,3 +1,7 @@
+<?php
+ob_start();
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,6 +13,7 @@
 <body>
     <?php
         include 'update_user.php';
+        ob_end_flush();
     ?>
     <script>
         // if document is ready

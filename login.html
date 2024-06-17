@@ -1,3 +1,7 @@
+<?php
+ob_start();
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +12,8 @@
 </head>
 <body>
     <?php
-        include 'login.php';
+    include 'login.php';
+    ob_end_flush();
     ?>
 </body>
 </html>

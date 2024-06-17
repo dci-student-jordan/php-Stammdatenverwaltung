@@ -1,5 +1,4 @@
 <?php
-session_start();
 if (!$_SESSION['is_authenticated']) {
     header('Location: login.html');
 }
