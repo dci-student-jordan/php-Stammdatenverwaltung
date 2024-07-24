@@ -22,7 +22,7 @@ else {
     // if no raum is is given, list all raeume
     if (!isset($_GET['raum_id'])) {
         echo '<h1>Räume</h1>'.$header;
-        $sql = "SELECT * FROM raum WHERE wohnung_id = ".$_GET['id'];
+        $sql = "SELECT raum.*, (SELECT COUNT(*) FROM raum_inventar WHERE raum_id = raum.id) AS inventar_count, CASE WHEN EXISTS (SELECT * FROM angebot WHERE raum_id = raum.id) THEN (SELECT erledigt FROM angebot WHERE raum_id = raum.id) ELSE -1 END AS angebot_status FROM raum WHERE wohnung_id = ".$_GET['id'];
         $result = $conn->query($sql);
         $conn->close();
         $total_qm = 0;
@@ -32,10 +32,15 @@ else {
             while($row = $result->fetch_assoc()) {
                 $groesse = '<form action="update_raum.php?id='.$row['id'].'" method="post"><input type="number" value="'.$row['qm'].'" step="0.01" name="qm_'.$row['id'].'"><button id="qm_'.$row['id'].'" type="submit" hidden></button> </form>';
                 $notiz = '<form action="update_raum.php?id='.$row['id'].'" method="post" title="hit ENTER to submit"><input value="'.$row['notiz'].'" name="notiz_'.$row['id'].'" style="max-width:150px"><button id="notiz_'.$row['id'].'" type="submit" hidden></button> </form>';
-                $inventar = '<a href="update_wohnung.html?id='.$_GET['id'].'&raum_id='.$row['id'].'">Inventar</a>';
-                $angebot = '<a href="angebot.html?raum_id='.$row['id'].'">Angebotsgenerator</a>';
+                $inventar = '<a href="update_wohnung.html?id='.$_GET['id'].'&raum_id='.$row['id'].'" style="color:' .($row['inventar_count'] ? (($row['angebot_status'] == 1) ? 'green;"' : 'yellow;"') : 'red;"').'>Inventar</a>';
+                $angebot = '<a href="angebot.html?raum_id='.$row['id'].'" style="color:' .(($row['angebot_status'] == -1) ? 'red;"' : (($row['angebot_status'] == 0) ? 'yellow;"' : 'green;"')).'>Angebotsgenerator</a>';
                 $delete = '<form action="delete_raum.php?id='.$row['id'].'" method="post"><button type="submit" style="color:red; background-color:white;" id="delete_raum">X</button></form>';
-                echo '<tr><td style="padding:5px;">' .$groesse.'</td><td style="padding:5px;">' .$notiz .'</td"><td style="padding:5px;">' .$inventar .'</td"><td style="padding:5px;">' .$angebot .'</td><td style="padding:5px">' .$delete .'</td></tr>';
+                echo '<tr><td style="padding:5px;">'
+                    .$groesse.'</td><td style="padding:5px;">'
+                    .$notiz .'</td"><td style="padding:5px;">'
+                    .$inventar .'</td"><td style="padding:5px;">'
+                    .$angebot .'</td><td style="padding:5px">'
+                    .$delete .'</td></tr>';
                 $total_qm += $row['qm'];
             }
         }

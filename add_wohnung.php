@@ -35,7 +35,6 @@ else {
     $fields = array();
     if (isset($_SESSION['fields'])) {
         $fields = $_SESSION['fields'];
-        echo 'GOT FIELDS<br>';
         unset($_SESSION['fields']);
     }
     if ($_SERVER["REQUEST_METHOD"] == "POST") {

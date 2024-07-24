@@ -32,6 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $row = $result->fetch_assoc();
         if (password_verify($pw, $row['pw'])) {
             $_SESSION['username'] = $row['vorname'];
+            $_SESSION['user_id'] = $row['id'];
             $_SESSION['is_authenticated'] = true;
             if ($row['is_admin'] == 1) {
                 $_SESSION['is_admin'] = true;

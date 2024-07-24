@@ -11,7 +11,7 @@ elseif (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == true) {
     include_once 'connection.php';
     $conn = connect();
     $id = $_GET['id'];
-    if ($id) {
+    if ($id AND $id != $_SESSION['user_id']) {
         $sql = "DELETE FROM user WHERE id=" .$id;
         if ($conn->query($sql) === TRUE) {
             $_SESSION['success'] = "User gelöscht!";
@@ -21,7 +21,12 @@ elseif (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == true) {
         header('Location: users.html');
     }
     else {
-        $_SESSION['warning'] = "Keine ID übergeben!";
+        if (!$id) {
+            $_SESSION['warning'] = "Keine ID übergeben!";
+        }
+        else {
+            $_SESSION['warning'] = "Du kannst dich nicht selbst löschen!";
+        }
         header('Location: users.html');
     }
     $conn->close();
