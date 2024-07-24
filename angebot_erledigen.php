@@ -6,15 +6,7 @@ if (!$_SESSION['is_authenticated']) {
     header('Location: login.html');
 }
 else {
-    include_once 'menu.php';
-    echo build_menu("angebot.html");
-    echo '<div class="splitdiv"><div><h1>Angebotsgenerator</h1>';
     $id = $_GET['id'];
-    if (!$id) {
-        echo '<h3 style="color:red;">No id given</h3>';
-        exit();
-    }
-    include_once 'messages.php';
 
     include_once 'connection.php';
     $conn = connect();

@@ -81,6 +81,7 @@ else {
         exit();
     }
     else {
+        $total_preis = 0;
         echo '<div style="margin: 20px; padding: 20px; overflow-x: scroll; max-width: 80vw; background-color: rgb(20, 6, 32); box-shadow: 0 4px 8px 0 rgba(177, 177, 177, 0.2), 2px -6px 20px 0 rgba(189, 149, 199, 0.399); border-radius: 20px;">';
         // create the form to possibly select inventar
         $form = '<form action="add_angebot.html?raum_id='.$raum_id.'" method="post">';
@@ -101,9 +102,10 @@ else {
             $result = $conn->query($sql);
             if ($result->num_rows > 0) {
                 $form_init = false;
-                $form .= '<label for="'.$key.'"><strong style="font-size: 25px;">'.$value.'x '.$key.', ';
+                $form .= '<label for="'.$key.'"><strong style="font-size: 20px;">'.$value.'x '.$key.', ';
                 while($row = $result->fetch_assoc()) {
                     $gesamt_preis = $value * floatval($row['preis']);
+                    $total_preis += $gesamt_preis;
                     if (!$form_init) {
                         $form.= $gesamt_preis.'€, (Einzelpreis: '.$row['preis'].'€):</strong></label><br>
                             <select id="'.$key.'" name="'.$key.'">';
@@ -118,7 +120,7 @@ else {
                 $form .= '</select><br>';
             }
         }
-        echo $form .'<br><button type="submit" name="post" id="go">Angebot abschicken</button></form></div></div>';
+        echo $form .'<p><strong style="font-size: 25px;"> Summe Preis: '.$total_preis.'</p><br><button type="submit" name="post" id="go">Angebot abschicken</button></form></div></div>';
     }
 }
 ?>

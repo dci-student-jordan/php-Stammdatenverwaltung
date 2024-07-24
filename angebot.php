@@ -38,6 +38,7 @@ else {
             echo '<button><a href="update_wohnung.html?id='.$row['id'].'">Zurück zur Raumübersicht</a></button><h2>Angebot für Raum "'.$row['notiz'].'"</h2>';
             echo '<h4><em>Wohnung: '.$row['strasse'].' '.$row['hausnummer'].', '.$row['plz'].' '.$row['stadt'].', '.$row['bundesland'].', Etage: '.$row['etage'].'</em></h4>';
             echo '<h3><em>Raum Größe: '.$row['qm'].' m2</em></h3><br>';
+            $raum_groesse = $row['qm'];
         }
         // check if there is already an angebot for this raum
         $sql = "SELECT * FROM angebot WHERE raum_id = ".$id;

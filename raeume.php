@@ -123,6 +123,7 @@ else {
         else {
             echo '<h2>Raum nicht gefunden.</h2>';
         }
+        echo '<button><a href="angebot.html?raum_id='.$raum_id.'">Zum Angebotsgenerator</a></button>';
         // form for adding raum-inventar
         echo '<br><h2>Raum-Inventar hinzufügen</h2>'.$header
             .'<form action="add_raum_inventar.php?id='.$_GET['id'].'&raum_id='.$raum_id.'" method="post">
