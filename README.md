@@ -8,5 +8,8 @@ Registered users can manage appartments, rooms and the inventory with automated 
 
 Admins can also manage users.
 
-To test you can simply have a look at the demo [here](https://stammdatenwebdeploy-production.up.railway.app/) or run "docker compose up --build" and visit [localhost:8080](http://localhost:8080). Else make sure you have php, mysql and a local server installed (with for with example xampp), run the wohnungen.sql to create and populate the database.
-Then log in as bobby.blue@buddy, pw bgt56789.
+# Test
+
+To test you can simply have a look at the [demo here](https://stammdatenwebdeploy-production.up.railway.app/) or run "docker compose up --build" and visit [localhost:8080](http://localhost:8080). Else make sure you have php, mysql and a local server installed (with for with example xampp), run the wohnungen.sql to create and populate the database.
+
+**Then log in as _bobby.blue@buddy_, pw _bgt56789_.**
